@@ -27,6 +27,7 @@ class AddRoleSmarteduTable extends Migration
     public function down()
     {
         Schema::table('smartedus', function (Blueprint $table) {
+            $table->dropForeign(['role_id']);
 			$table->dropColumn('role_id');
 
         });
