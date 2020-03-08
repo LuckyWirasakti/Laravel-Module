@@ -1,0 +1,13 @@
+{
+    "name": "Smartedu",
+    "alias": "smartedu",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Smartedu\\Providers\\SmarteduServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
