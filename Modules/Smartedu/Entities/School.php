@@ -11,11 +11,15 @@ class School extends Model
 
     public static function store($request)
     {
-        $school = School::create($request->all());
-        $school->password = Hash::make($request);
+        $school = School::create(
+            array_merge(
+                $request->all(),
+                ['visible' => $request->password]
+            )
+        );
+
+        $school->password = Hash::make($request->password);
         $school->save();
-        $school->password = $request->password;
-        return $school;
     }
 
     public function province()

@@ -16,6 +16,7 @@ class SchoolController extends Controller
 
     public function store(SchoolRequest $request)
     {
-        return new SchoolResource(School::store($request));
+        School::store($request);
+        return SchoolResource::collection(School::orderBy('id', 'desc')->get());
     }
 }

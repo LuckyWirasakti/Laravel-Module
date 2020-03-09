@@ -21,7 +21,7 @@ class SchoolResource extends Resource
             'regency' => $this->regency->name,
             'level' => $this->level->name,
             'username' => $this->username,
-            'password' => $this->password,
+            'password' => $this->visible,
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans(),
         ];
