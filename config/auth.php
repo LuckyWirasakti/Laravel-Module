@@ -45,6 +45,11 @@ return [
             'driver' => 'jwt',
             'provider' => 'smartedu'
         ],
+
+        'school' => [
+            'driver' => 'jwt',
+            'provider' => 'school'
+        ],
     ],
 
     /*
@@ -68,6 +73,11 @@ return [
         'smartedu' => [
             'driver' => 'eloquent',
             'model' => Modules\Smartedu\Entities\Smartedu::class,
+        ],
+
+        'school' => [
+            'driver' => 'eloquent',
+            'model' => Modules\School\Entities\School::class,
         ],
 
         // 'users' => [
