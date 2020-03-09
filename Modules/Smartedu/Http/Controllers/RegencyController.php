@@ -8,8 +8,8 @@ use Modules\Smartedu\Transformers\RegencyResource;
 
 class RegencyController extends Controller
 {
-    public function index()
+    public function index($province_id)
     {
-        return RegencyResource::collection(Regency::paginate(10));
+        return RegencyResource::collection(Regency::where('province_id', $province_id)->get());
     }
 }

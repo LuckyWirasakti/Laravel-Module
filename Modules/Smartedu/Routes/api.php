@@ -18,7 +18,7 @@ Route::group(['prefix' => 'smartedu'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('level','LevelController@index');
         Route::get('province','ProvinceController@index');
-        Route::get('regency','RegencyController@index');
+        Route::get('regency/{province_id}','RegencyController@index');
         Route::group(['prefix' => 'school'], function () {
             Route::get('','SchoolController@index');
             Route::post('','SchoolController@store');
