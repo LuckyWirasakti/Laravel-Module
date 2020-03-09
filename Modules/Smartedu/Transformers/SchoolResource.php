@@ -20,7 +20,7 @@ class SchoolResource extends Resource
             'province' => $this->province->name,
             'regency' => $this->regency->name,
             'level' => $this->level->name,
-            'user' => $this->user,
+            'username' => $this->username,
             'password' => $this->password,
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans(),

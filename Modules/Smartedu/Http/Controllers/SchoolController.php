@@ -16,6 +16,6 @@ class SchoolController extends Controller
 
     public function store(SchoolRequest $request)
     {
-        return new SchoolResource(School::create($request->all()));
+        return new SchoolResource(School::store($request));
     }
 }
