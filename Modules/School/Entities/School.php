@@ -2,10 +2,13 @@
 
 namespace Modules\School\Entities;
 
+use Modules\School\Entities\Level;
+use Modules\School\Entities\Regency;
+use Modules\School\Entities\Province;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Modules\School\Transformers\SchoolResource;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class School extends Authenticatable implements JWTSubject
 {
@@ -34,6 +37,21 @@ class School extends Authenticatable implements JWTSubject
             'expires_in' => auth('school')->factory()->getTTL() * 60 * 3,
             'user' => auth('school')->user()
         ];
+    }
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    public function regency()
+    {
+        return $this->belongsTo(Regency::class);
+    }
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
     }
 
     public function getJWTIdentifier()

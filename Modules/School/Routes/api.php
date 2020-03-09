@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/school', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'school'], function () {
+    Route::post('login', 'SchoolController@login');
 });
