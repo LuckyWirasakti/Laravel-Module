@@ -10,6 +10,6 @@ class ProvinceController extends Controller
 {
     public function index()
     {
-        return ProvinceResource::collection(Province::paginate(10));
+        return ProvinceResource::collection(Province::all());
     }
 }
