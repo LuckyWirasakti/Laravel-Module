@@ -56,33 +56,33 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if($exception instanceof MethodNotAllowedHttpException) {
-            return $this->response($exception);
-        } else if($exception instanceof NotFoundHttpException){
-            return $this->response($exception);
-        } else if ($exception instanceof UnauthorizedHttpException) {
-            $preException = $exception->getPrevious();
-            if ($preException instanceof
-                TokenExpiredException) {
-                return $this->response($preException);
-            } else if ($preException instanceof
-                TokenInvalidException) {
-                return $this->response($preException);
-            } else if ($preException instanceof
-                TokenBlacklistedException) {
-                return $this->response($preException);;
-            } else if ($exception->getMessage() === 'Token not provided') {
-                return $this->response($preException);
-            }
-        } else if($exception instanceof HttpException){
-            return $this->response($exception);
-        } else if($exception instanceof QueryException){
-            return $this->response($exception);
-        } else if($exception instanceof AccessDeniedHttpException){
-            return $this->response($exception);
-        } else if($exception instanceof ErrorException){
-            return $this->response($exception);
-        }
+        // if($exception instanceof MethodNotAllowedHttpException) {
+        //     return $this->response($exception);
+        // } else if($exception instanceof NotFoundHttpException){
+        //     return $this->response($exception);
+        // } else if ($exception instanceof UnauthorizedHttpException) {
+        //     $preException = $exception->getPrevious();
+        //     if ($preException instanceof
+        //         TokenExpiredException) {
+        //         return $this->response($preException);
+        //     } else if ($preException instanceof
+        //         TokenInvalidException) {
+        //         return $this->response($preException);
+        //     } else if ($preException instanceof
+        //         TokenBlacklistedException) {
+        //         return $this->response($preException);;
+        //     } else if ($exception->getMessage() === 'Token not provided') {
+        //         return $this->response($preException);
+        //     }
+        // } else if($exception instanceof HttpException){
+        //     return $this->response($exception);
+        // } else if($exception instanceof QueryException){
+        //     return $this->response($exception);
+        // } else if($exception instanceof AccessDeniedHttpException){
+        //     return $this->response($exception);
+        // } else if($exception instanceof ErrorException){
+        //     return $this->response($exception);
+        // }
 
         return parent::render($request, $exception);
     }
