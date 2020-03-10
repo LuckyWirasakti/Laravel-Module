@@ -10,6 +10,6 @@ class LevelController extends Controller
 {
     public function index()
     {
-        return LevelResource::collection(Level::paginate(10));
+        return LevelResource::collection(Level::all());
     }
 }
