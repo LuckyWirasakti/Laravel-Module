@@ -14,7 +14,7 @@ class AddSchoolToGroup extends Migration
     public function up()
     {
         Schema::table('groups', function (Blueprint $table) {
-            $table->integer('school_id')->unsigned()->after('amount');
+            $table->integer('school_id')->unsigned()->after('name');
             $table->foreign('school_id')->references('id')->on('schools');
         });
     }
