@@ -2,6 +2,7 @@
 
 namespace Modules\School\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\School\Entities\Major;
 use Modules\School\Http\Requests\MajorRequest;
@@ -14,19 +15,13 @@ class MajorController extends Controller
         return MajorResource::collection(Major::all());
     }
 
-    public function store(MajorRequest $request)
+    public function update(Request $request, $id)
     {
-        Major::create(
-            array_merge(
-                $request->all(),
-                ['school_id' => auth('school')->id()]
-            )
-        );
+        Major::where('id', $id)
+        ->update([
+            'name' => $request->name,
+            'school_id' => auth('school')->id()
+        ]);
         return MajorResource::collection(Major::all());
-    }
-
-    public function destroy($id)
-    {
-        //
     }
 }
