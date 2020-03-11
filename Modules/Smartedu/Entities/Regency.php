@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Regency extends Model
 {
-    protected $fillable = [];
+    protected $fillable = ['name', 'province_id'];
 }

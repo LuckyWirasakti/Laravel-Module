@@ -16,9 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'smartedu'], function () {
     Route::post('login', 'SmarteduController@login');
     Route::group(['middleware' => 'auth:api'], function () {
-        Route::get('level','LevelController@index');
-        Route::get('province','ProvinceController@index');
-        Route::get('regency/{province_id}','RegencyController@index');
+        Route::group(['prefix' => 'level'], function () {
+            Route::get('','LevelController@index');
+            Route::put('{id}','LevelController@update');
+        });
+        Route::group(['prefix' => 'province'], function () {
+            Route::get('','ProvinceController@index');
+            Route::put('{id}','ProvinceController@update');
+        });
+        Route::group(['prefix' => 'regency'], function () {
+            Route::get('{province_id}','RegencyController@index');
+            Route::put('{id}','RegencyController@update');
+        });
         Route::group(['prefix' => 'school'], function () {
             Route::get('','SchoolController@index');
             Route::post('','SchoolController@store');
