@@ -30,5 +30,9 @@ Route::group(['prefix' => 'school'], function () {
             Route::get('','MasterController@index');
             Route::post('','MasterController@store');
         });
+        Route::group(['prefix' => 'subject'], function () {
+            Route::get('','SubjectController@index');
+            Route::post('','SubjectController@store');
+        });
     });
 });
