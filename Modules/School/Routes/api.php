@@ -19,11 +19,16 @@ Route::group(['prefix' => 'school'], function () {
     Route::group(['middleware' => 'auth:school'], function () {
         Route::group(['prefix' => 'group'], function () {
             Route::get('','GroupController@index');
-            Route::post('','GroupController@store');
         });
         Route::group(['prefix' => 'major'], function () {
             Route::get('','MajorController@index');
-            Route::post('','MajorController@store');
+        });
+        Route::group(['prefix' => 'room'], function () {
+            Route::get('','RoomController@index');
+        });
+        Route::group(['prefix' => 'master'], function () {
+            Route::get('','MasterController@index');
+            Route::post('','MasterController@store');
         });
     });
 });

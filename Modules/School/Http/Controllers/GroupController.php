@@ -2,6 +2,7 @@
 
 namespace Modules\School\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\School\Entities\Group;
 use Modules\School\Http\Requests\GroupRequest;
@@ -14,19 +15,14 @@ class GroupController extends Controller
         return GroupResource::collection(Group::all());
     }
 
-    public function store(GroupRequest $request)
+    public function update(Request $request, $id)
     {
-        Group::create(
-            array_merge(
-                $request->all(),
-                ['school_id' => auth('school')->id()]
-            )
-        );
-        return GroupResource::collection(Group::all());
-    }
+        Group::where('id', $id)
+        ->update([
+            'name' => $request->name,
+            'school_id' => auth('school')->id()
+        ]);
 
-    public function destroy($id)
-    {
-        //
+        return GroupResource::collection(Group::all());
     }
 }

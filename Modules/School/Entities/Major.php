@@ -8,5 +8,5 @@ class Major extends Model
 {
     protected $guarded = ['id','created_at','updated_at'];
 
-    protected $hidden = ['group_id', 'school_id'];
+    protected $hidden = ['school_id'];
 }
