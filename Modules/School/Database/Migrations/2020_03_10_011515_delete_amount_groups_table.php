@@ -14,8 +14,8 @@ class DeleteAmountGroupsTable extends Migration
     public function up()
     {
         Schema::table('groups', function (Blueprint $table) {
-            $table->dropColumn(['amount']);
             $table->dropForeign(['amount']);
+            $table->dropColumn(['amount']);
         });
     }
 
