@@ -34,5 +34,8 @@ Route::group(['prefix' => 'school'], function () {
             Route::get('','SubjectController@index');
             Route::post('','SubjectController@store');
         });
+        Route::group(['prefix' => 'participant'], function () {
+            Route::get('','ParticipantController@index');
+        });
     });
 });
