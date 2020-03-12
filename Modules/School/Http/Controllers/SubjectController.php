@@ -17,7 +17,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return SubjectResource::collection(Subject::all());
+        return SubjectResource::collection(Subject::with(['major', 'group'])->get());
     }
 
     /**
@@ -26,7 +26,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**

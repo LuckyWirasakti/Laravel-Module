@@ -9,5 +9,14 @@ class Subject extends Model
     protected $guarded = ['id','created_at','updated_at'];
 
     protected $hidden = ['group_id', 'school_id'];
-    protected $fillable = [];
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
+
+    public function major()
+    {
+        return $this->belongsTo(Major::class);
+    }
 }
