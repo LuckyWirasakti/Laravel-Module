@@ -5,14 +5,15 @@ namespace Modules\School\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\School\Entities\Major;
-use Modules\School\Http\Requests\MajorRequest;
+use Modules\School\Entities\Master;
 use Modules\School\Transformers\MajorResource;
+use Modules\School\Transformers\MasterResource;
 
 class MajorController extends Controller
 {
     public function index()
     {
-        return MajorResource::collection(Major::all());
+        return MasterResource::collection(Master::with(['group', 'major'])->get());
     }
 
     public function update(Request $request, $id)
