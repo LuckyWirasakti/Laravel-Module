@@ -37,5 +37,13 @@ Route::group(['prefix' => 'school'], function () {
         Route::group(['prefix' => 'participant'], function () {
             Route::get('','ParticipantController@index');
         });
+        // Add Soal
+        Route::group(['prefix' => 'soal'], function () {
+            Route::post('','SoalController@store');
+        });
+        // Read Soal
+        Route::group(['prefix' => 'soal'], function () {
+            Route::get('/show','SoalController@getSubjectSoal');
+        });
     });
 });
