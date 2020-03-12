@@ -4,10 +4,8 @@ namespace Modules\School\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Subject extends Model
+class Soal extends Model
 {
+    protected $table = 'soal';
     protected $guarded = ['id','created_at','updated_at'];
-
-    protected $hidden = ['group_id', 'school_id'];
-    protected $fillable = [];
 }
