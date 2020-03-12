@@ -9,5 +9,5 @@ class Subject extends Model
     protected $guarded = ['id','created_at','updated_at'];
 
     protected $hidden = ['group_id', 'school_id'];
-    // protected $fillable = [];
+    protected $fillable = [];
 }

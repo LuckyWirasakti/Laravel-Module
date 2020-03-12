@@ -17,7 +17,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return view('school::index');
+        return SubjectResource::collection(Subject::all());
     }
 
     /**
@@ -26,7 +26,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        return view('school::create');
+        
     }
 
     /**
@@ -75,7 +75,8 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $subject = Subject::findOrFail($id);
+        $subject->fill($request->all())->save();
     }
 
     /**
