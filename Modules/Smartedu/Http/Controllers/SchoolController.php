@@ -3,7 +3,12 @@
 namespace Modules\Smartedu\Http\Controllers;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Hash;
+use Modules\Smartedu\Entities\Level;
 use Modules\Smartedu\Entities\School;
+use Modules\Smartedu\Entities\Regency;
+use Modules\Smartedu\Entities\Province;
+use Modules\Smartedu\Http\Requests\ImportRequest;
 use Modules\Smartedu\Http\Requests\SchoolRequest;
 use Modules\Smartedu\Transformers\SchoolResource;
 
@@ -16,7 +21,41 @@ class SchoolController extends Controller
 
     public function store(SchoolRequest $request)
     {
-        School::store($request);
-        return SchoolResource::collection(School::orderBy('id', 'desc')->get());
+        School::create([
+            'name' => $request->name,
+            'province_id' => $request->province_id,
+            'regency_id' => $request->regency_id,
+            'level_id' => $request->level_id,
+            'username' => $request->username,
+            'visible' => $request->password,
+            'password' => Hash::make($request->password),
+            'name' => $request->name,
+        ]);
+
+        return $this->index();
+    }
+
+    public function import(ImportRequest $request)
+    {
+        School::create([
+            'name' => $request->name,
+            'province_id' => Province::firstOrCreate([
+                'name' => $request->province->name
+            ])->id,
+            'regency_id' => Regency::firstOrCreate([
+                'name' => $request->province->name,
+                'province_id' => Province::firstOrCreate([
+                    'name' => $request->province->name
+                ])->id
+            ])->id,
+            'level_id' => Level::firstOrCreate([
+                'name' => $request->level->name
+            ])->id,
+            'username' => $request->username,
+            'visible' => $request->password,
+            'password' => Hash::make($request->password),
+            'name' => $request->name,
+        ]);
+        return $this->index();
     }
 }
