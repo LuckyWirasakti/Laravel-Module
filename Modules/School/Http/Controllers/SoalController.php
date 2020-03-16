@@ -55,6 +55,8 @@ class SoalController extends Controller
         ], 201);
     }
 
+    // fungsi soal untuk user ujian
+    // Tampil Pertanyaan dan semua Jawaban A, B, C, D (kunci jawaban tidak di tampilkan)
     public function getSubjectSoal(Request $request)
     {
         $validate = $request->validate([
@@ -79,6 +81,59 @@ class SoalController extends Controller
             $soal->jawaban = $pilihanFiltered;
         }
         return response()->json($db['soal'], 200);
+    }
+
+    // fungsi get soal untuk admin, untuk cek soal
+    // Tampil Pertanyaan, Pembahasan dan Kunci Jawaban
+    public function getSoal(Request $request)
+    {
+        $validate = $request->validate([
+            'id_subject' => 'required'
+        ]);
+        
+        $db['soal'] = Soal::where('id_subject', intval($request->id_subject))
+            ->select('id', 'pertanyaan', 'jawaban', 'pembahasan')
+            ->get();
+
+        foreach($db['soal'] as $soal){
+            $pilihanFiltered = [];
+            $pilihan = json_decode($soal->jawaban);
+
+            foreach($pilihan as $key => $konten) {
+                if($konten->kunci == true){
+                
+                    array_push($pilihanFiltered, [
+                        'kunci' => $key,
+                    ]);
+                }
+            }
+
+            $soal->jawaban = $pilihanFiltered;  
+        }
+        return response()->json($db['soal'], 200);
+    }
+
+    public function fileUpload(Request $request)
+    {
+        if ($request->file('image')) {
+            //get extension
+            $filenamewithextension = $request->file('image')->getClientOriginalName();
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+
+            //Upload File
+            $request->file('image')->storeAs('public/soal', $filenametostore);
+            
+            return response()->json(['url' => public_path() .'/public/soal/' . $filenametostore]);
+        }
+    }
+
+    public function submit(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            
+        ]);
     }
 
 }
