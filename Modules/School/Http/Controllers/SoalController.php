@@ -115,7 +115,7 @@ class SoalController extends Controller
 
     public function fileUpload(Request $request)
     {
-        if ($request->file('image')) {
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
             //get extension
             $filenamewithextension = $request->file('image')->getClientOriginalName();
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
@@ -125,8 +125,9 @@ class SoalController extends Controller
             //Upload File
             $request->file('image')->storeAs('public/soal', $filenametostore);
             
-            return response()->json(['url' => public_path() .'/public/soal/' . $filenametostore]);
+            return response()->json(['url' => asset('storage/soal/'.$filenametostore)]);
         }
+            return ['status' => 'NOT_SAVED'];
     }
 
     public function submit(Request $request)
