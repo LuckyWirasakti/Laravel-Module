@@ -97,6 +97,7 @@ class SoalController extends Controller
 
         foreach($db['soal'] as $soal){
             $pilihanFiltered = [];
+            $pilihanJawaban = [];
             $pilihan = json_decode($soal->jawaban);
 
             foreach($pilihan as $key => $konten) {
@@ -106,8 +107,13 @@ class SoalController extends Controller
                         'kunci' => $key,
                     ]);
                 }
+                array_push($pilihanJawaban, [
+                    'key' => $key,
+                    'teks' => $konten->teks
+                ]); 
             }
 
+            $soal->pilihanjawaban = $pilihanJawaban;  
             $soal->jawaban = $pilihanFiltered;  
         }
         return response()->json($db['soal'], 200);
