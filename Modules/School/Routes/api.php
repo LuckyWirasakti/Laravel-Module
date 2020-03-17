@@ -37,13 +37,18 @@ Route::group(['prefix' => 'school'], function () {
         Route::group(['prefix' => 'participant'], function () {
             Route::get('','ParticipantController@index');
         });
-        // Add Soal
+        // Soal
         Route::group(['prefix' => 'soal'], function () {
+            // add soal
             Route::post('','SoalController@store');
-        });
-        // Read Soal
-        Route::group(['prefix' => 'soal'], function () {
-            Route::get('/show','SoalController@getSubjectSoal');
+            // file upload
+            Route::post('/file/upload','SoalController@fileUpload');
+            // get Soal admin
+            Route::get('/show','SoalController@getSoal');
+
+            // Ujian
+            // get Soal
+            Route::get('/ujian/subject/','SoalController@getSubjectSoal');
         });
     });
 });
