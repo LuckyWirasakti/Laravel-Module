@@ -41,8 +41,6 @@ Route::group(['prefix' => 'school'], function () {
         Route::group(['prefix' => 'soal'], function () {
             // add soal
             Route::post('','SoalController@store');
-            // file upload
-            Route::post('/file/upload','SoalController@fileUpload');
             // get Soal admin
             Route::get('/show','SoalController@getSoal');
 
@@ -52,3 +50,7 @@ Route::group(['prefix' => 'school'], function () {
         });
     });
 });
+
+
+// file upload
+Route::post('/soal/file/upload','SoalController@fileUpload');
