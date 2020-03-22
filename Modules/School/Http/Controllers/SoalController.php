@@ -131,9 +131,9 @@ class SoalController extends Controller
             //Upload File
             $request->file('upload')->storeAs('public/soal', $filenametostore);
             
-            return response()->json(['url' => asset('storage/soal/'.$filenametostore)]);
+            return asset('storage/soal/'.$filenametostore);
         }
-            return ['status' => 'NOT_SAVED'];
+            return 'Gagal! File tidak bisa di simpan.';
     }
 
     public function submit(Request $request)
