@@ -28,7 +28,6 @@ class ManageTesResource extends Resource
             'day' => $this->day,
             'status' => $this->status,
             'created_at' => $this->created_at->diffForHumans(),
-            'updated_at' => $this->updated_at->diffForHumans()
         ];
     }
 }
