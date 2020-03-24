@@ -50,6 +50,11 @@ return [
             'driver' => 'jwt',
             'provider' => 'school'
         ],
+
+        'participant' => [
+            'driver' => 'jwt',
+            'provider' => 'participant'
+        ],
     ],
 
     /*
@@ -78,6 +83,11 @@ return [
         'school' => [
             'driver' => 'eloquent',
             'model' => Modules\School\Entities\School::class,
+        ],
+
+        'participant' => [
+            'driver' => 'eloquent',
+            'model' => Modules\School\Entities\Participant::class,
         ],
 
         // 'users' => [
