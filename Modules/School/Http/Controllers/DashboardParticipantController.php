@@ -17,7 +17,7 @@ class DashboardParticipantController extends Controller
         $request->validate([
             'school_id' => 'required',
             'group_id' => 'required',
-            'subject_id' => 'required',
+            'major_id' => 'required',
         ]);
         
         $getMapel = DB::table('manage_tes')
@@ -26,7 +26,7 @@ class DashboardParticipantController extends Controller
             ->where([
                 'manage_tes.school_id' => $request->school_id,
                 'manage_tes.group_id' => $request->group_id,
-                'manage_tes.subject_id' => $request->subject_id,
+                'manage_tes.major_id' => $request->major_id,
                 'manage_tes.status' => 1
                 ])
             ->get();
@@ -78,12 +78,12 @@ class DashboardParticipantController extends Controller
     public function detailInformasi(Request $request)
     {
         $request->validate([
-            'user_id' => 'required',
             'id_manage_tes' => 'required',
         ]);
+        $id_user = auth('participant')->id();
 
         $data = [];
-        $participant = Participant::where('id', $request->user_id)->first();
+        $participant = Participant::where('id', $id_user)->first();
         $manage_tes = DB::table('manage_tes')
                         ->join('subjects', 'subjects.id', '=', 'manage_tes.subject_id')
                         ->where('manage_tes.id', $request->id_manage_tes)

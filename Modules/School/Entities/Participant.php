@@ -17,6 +17,10 @@ class Participant extends Authenticatable implements JWTSubject
 
     protected $hidden = ['password'];
 
+    public function username()
+    {
+        return 'nisn';
+    }
     public static function login($request)
     {
         $token = auth('participant')->attempt($request->only(['nisn', 'password'])) or abort(401, 'Unauthorized');
