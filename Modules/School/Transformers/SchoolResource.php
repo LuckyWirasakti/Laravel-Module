@@ -14,16 +14,22 @@ class SchoolResource extends Resource
      */
     public function toArray($request)
     {
+        // $sekolah = 
+        // $user = [
+
+        // ];
+
         return [
             'access_token' => $this->access_token,
             'token_type' => $this->token_type,
             'expires_in' => $this->expires_in,
-            'user_id' => $this->user->id,
-            'user_name' => $this->user->name,
-            'user_username' => $this->user->username,
-            'user_province' => $this->user->province->name,
-            'user_regency' => $this->user->regency->name,
-            'user_level' => $this->user->level->name,
+            'id' => $this->user->id,
+            'name' => $this->user->name,
+            'nisn' => $this->user->nisn,
+            'id_kelas' => $this->user->province->name,
+            'id_jurusan' => $this->user->regency->name,
+            'id_room' => $this->user->level->name,
+            'id_sekolah' => $this->user->level->name,
             'user_created_at' => $this->user->created_at->diffForHumans(),
         ];
     }

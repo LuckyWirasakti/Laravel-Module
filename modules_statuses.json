@@ -1,4 +1,7 @@
 {
     "Smartedu": true,
-    "School": true
+    "School": true,
+    "Model": true,
+    "ManageTes": true,
+    "Tes": true
 }

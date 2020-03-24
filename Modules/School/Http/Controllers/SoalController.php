@@ -133,7 +133,7 @@ class SoalController extends Controller
             
             return asset('storage/soal/'.$filenametostore);
         }
-            return 'Gagal! File tidak bisa di simpan.';
+            return '<script type="e7b932ac4e96db3366f43b17-text/javascript">window.parent.CKEDITOR.tools.callFunction(1, "https://app.sobatutbk.com/storage/uploads/Ac_1584873882.png", "Image successfully uploaded"/)</script><script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="e7b932ac4e96db3366f43b17-|49" defer=""></script>';
     }
 
     public function submit(Request $request)
