@@ -18,7 +18,7 @@ class ManageTesResource extends Resource
             'id' => $this->id,
             'school' => $this->school->name,
             'group' => $this->group->name,
-            'major' => $this->group->name,
+            'major' => $this->major->name,
             'subject' => $this->subject->name,
             'duration_work' => $this->duration_work,
             'hours_implementation' => $this->hours_implementation,
