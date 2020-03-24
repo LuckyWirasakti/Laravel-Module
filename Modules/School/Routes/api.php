@@ -58,9 +58,12 @@ Route::group(['prefix' => 'participant'], function () {
         Route::get('getmapel','DashboardParticipantController@getMapel');
         Route::post('validateToken','DashboardParticipantController@verifTokenMapel');
         Route::get('detail_informasi','DashboardParticipantController@detailInformasi');
-        // Ujian
-        // get Soal
-        Route::get('/ujian/subject/','SoalController@getSubjectSoal');
+        
+        Route::group(['prefix' => 'soal'], function () {
+            // Ujian
+            // get Soal
+            Route::get('/ujian/subject/','SoalController@getSubjectSoal');
+        });
     });
 });
 
