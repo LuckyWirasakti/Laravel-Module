@@ -12,4 +12,5 @@ class SchoolController extends Controller
     {
         return School::login($request);
     }
+
 }
