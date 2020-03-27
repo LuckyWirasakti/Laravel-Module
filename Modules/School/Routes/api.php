@@ -37,6 +37,9 @@ Route::group(['prefix' => 'school'], function () {
         });
         Route::group(['prefix' => 'participant'], function () {
             Route::get('','ParticipantController@index');
+            Route::delete('/{id}/deleteAll', 'ParticipantController@deleteAllBysekolah');
+            Route::delete('/{id}','ParticipantController@deleteParticipant');
+            Route::put('/{id}','ParticipantController@update');
         });
         // Soal
         Route::group(['prefix' => 'soal'], function () {
