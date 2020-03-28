@@ -9,10 +9,10 @@ use Modules\School\Transformers\RoomResource;
 
 class RoomController extends Controller
 {
-    public function index()
+    public function index($id)
     {
         return RoomResource::collection(
-            Room::with([
+            Room::where('school_id',$id)->with([
                 'master'=> function($query){
                     $query->with([
                         'group',

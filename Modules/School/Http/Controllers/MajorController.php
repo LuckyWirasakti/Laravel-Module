@@ -13,7 +13,7 @@ class MajorController extends Controller
 {
     public function index()
     {
-        return MasterResource::collection(Master::with(['group', 'major'])->get());
+        return MasterResource::collection(Master::where('school_id',auth('school')->id())->with(['group', 'major'])->get());
     }
 
     public function update(Request $request, $id)

@@ -48,7 +48,7 @@ Route::group(['prefix' => 'school'], function () {
             Route::get('/show','SoalController@getSoal');
 
         });
-    
+
         Route::group(['prefix' => 'manage/tes'], function () {
             Route::get('', 'ManageTesController@index');
             Route::post('', 'ManageTesController@store');
@@ -61,7 +61,7 @@ Route::group(['prefix' => 'participant'], function () {
         Route::get('getmapel','DashboardParticipantController@getMapel');
         Route::post('validateToken','DashboardParticipantController@verifTokenMapel');
         Route::get('detail_informasi','DashboardParticipantController@detailInformasi');
-        
+
         Route::group(['prefix' => 'soal'], function () {
             // Ujian
             // get Soal
