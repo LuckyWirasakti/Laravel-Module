@@ -46,12 +46,15 @@ Route::group(['prefix' => 'school'], function () {
             // Admin
             Route::post('','SoalController@store');
             Route::get('/show','SoalController@getSoal');
+            Route::put('/{id}','SoalController@update');
+            Route::delete('/{id}','SoalController@destroy');
 
         });
 
         Route::group(['prefix' => 'manage/tes'], function () {
             Route::get('', 'ManageTesController@index');
             Route::post('', 'ManageTesController@store');
+            Route::delete('/{id}', 'ManageTesController@destroy');
         });
     });
 });

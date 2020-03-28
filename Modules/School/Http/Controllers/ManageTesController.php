@@ -44,7 +44,7 @@ class ManageTesController extends Controller
             'data' => $manageTes
         ];
         return response()->json($response);
-        
+
     }
 
     public function update(Request $request, $id)
@@ -54,6 +54,21 @@ class ManageTesController extends Controller
 
     public function destroy($id)
     {
-        //
+        $manageTes = ManageTes::find($id);
+        if ($manageTes) {
+            $manageTes->delete();
+            $response = [
+                'status' => 'success',
+                'message' => 'Data berhasil dihapus',
+            ];
+            return response()->json($response);
+        } else {
+            $response = [
+                'status' => 'failed',
+                'message' => 'Data gagal dihapus',
+            ];
+            return response()->json($response);
+        }
+
     }
 }
