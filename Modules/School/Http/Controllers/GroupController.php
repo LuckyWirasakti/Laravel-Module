@@ -10,9 +10,9 @@ use Modules\School\Transformers\GroupResource;
 
 class GroupController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        return GroupResource::collection(Group::all());
+        return GroupResource::collection(Group::where('school_id', $id)->get());
     }
 
     public function update(Request $request, $id)

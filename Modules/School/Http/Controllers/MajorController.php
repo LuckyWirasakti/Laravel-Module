@@ -11,9 +11,9 @@ use Modules\School\Transformers\MasterResource;
 
 class MajorController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        return MasterResource::collection(Master::with(['group', 'major'])->get());
+        return MasterResource::collection(Master::where('school_id',$id)->with(['group', 'major'])->get());
     }
 
     public function update(Request $request, $id)
