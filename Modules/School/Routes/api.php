@@ -19,13 +19,13 @@ Route::group(['prefix' => 'school'], function () {
     Route::post('login/siswa', 'ParticipantController@login');
     Route::group(['middleware' => 'auth:school'], function () {
         Route::group(['prefix' => 'group'], function () {
-            Route::get('/{id}','GroupController@index');
+            Route::get('','GroupController@index');
         });
         Route::group(['prefix' => 'major'], function () {
-            Route::get('/{id}','MajorController@index');
+            Route::get('','MajorController@index');
         });
         Route::group(['prefix' => 'room'], function () {
-            Route::get('/{id}','RoomController@index');
+            Route::get('','RoomController@index');
         });
         Route::group(['prefix' => 'master'], function () {
             Route::get('','MasterController@index');
