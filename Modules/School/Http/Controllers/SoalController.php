@@ -8,6 +8,8 @@ use Modules\School\Entities\Soal;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\School\Entities\UjianJawaban;
+use Modules\School\Http\Services\Ujian\CorrectionService;
 
 class SoalController extends Controller
 {
@@ -138,7 +140,41 @@ class SoalController extends Controller
 
     public function submit(Request $request)
     {
-        $validate = Validator::make($request->all(), []);
+        $validate = Validator::make($request->all(), [
+            'participant_id' => 'required|numeric',
+            'subject_id' => 'required|numeric',
+            'jawaban' => 'required|string',
+            'durasi_ujian' => 'numeric'
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json($validate->errors(), 400);
+        }
+
+        // TODO: Cek apakah ujian masih berlaku
+        $ujianJawaban = UjianJawaban::updateOrCreate(
+            [
+                'participant_id' => $request->id_sub,
+                'subject_id' => $request->id_kategori_submateri
+            ],
+            [
+                'jawaban' => $request->jawaban,
+                'durasi_ujian' => $request->durasi_ujian,
+            ]
+        );
+
+        $correctionService = new CorrectionService;
+        $correctionService = $correctionService->calculate($ujianJawaban);
+        if (!$correctionService['success']) {
+            $ujianJawaban->delete();
+
+            return response()->json([
+                'message' => $correctionService['message']
+            ], $correctionService['code']);
+        }
+        $ujianJawaban->koreksi = json_encode($correctionService['result']);
+        $ujianJawaban->save();
+
     }
 
 
