@@ -154,8 +154,8 @@ class SoalController extends Controller
         // TODO: Cek apakah ujian masih berlaku
         $ujianJawaban = UjianJawaban::updateOrCreate(
             [
-                'participant_id' => $request->id_sub,
-                'subject_id' => $request->id_kategori_submateri
+                'participant_id' => $request->participant_id,
+                'subject_id' => $request->subject_id
             ],
             [
                 'jawaban' => $request->jawaban,
@@ -174,6 +174,10 @@ class SoalController extends Controller
         }
         $ujianJawaban->koreksi = json_encode($correctionService['result']);
         $ujianJawaban->save();
+
+        return response()->json([
+            'result' => $correctionService['result'],
+        ], $correctionService['code']);
 
     }
 
