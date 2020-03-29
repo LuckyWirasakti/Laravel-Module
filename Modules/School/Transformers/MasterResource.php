@@ -20,7 +20,7 @@ class MasterResource extends Resource
                 'id' => $this->group->id,
                 'name' => $this->group->name,
             ],
-            'group' => [
+            'major' => [
                 'id' => $this->major->id,
                 'name' => $this->major->name,
             ],
