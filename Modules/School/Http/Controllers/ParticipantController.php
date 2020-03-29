@@ -31,7 +31,7 @@ class ParticipantController extends Controller
             'major_id'              => 'required',
             'room_id'               => 'required',
         ]);
-        $participant = Participant::where('nisn', $id)
+        $participant = Participant::where('id', $id)
         ->update([
             'name' => $request->name,
             'nisn' => $request->nisn,
