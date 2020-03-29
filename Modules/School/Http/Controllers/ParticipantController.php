@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Modules\School\Entities\Participant;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use Hash;
 
 class ParticipantController extends Controller
 {
@@ -35,12 +36,13 @@ class ParticipantController extends Controller
         ->update([
             'name' => $request->name,
             'nisn' => $request->nisn,
-            'password' => $request->password,
+            'visible' => $request->password,
+            'password' => Hash::make($request->password),
             'group_id' => $request->group_id,
             'major_id' => $request->major_id,
             'room_id' => $request->room_id,
         ]);
-        return response()->json(['success' => 'Berhasil Update'], 200);
+        return ParticipantResource::collection(Participant::all());
     }
 
     public function deleteAllBysekolah($id)
