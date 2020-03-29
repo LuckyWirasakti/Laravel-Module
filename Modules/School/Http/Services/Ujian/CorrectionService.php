@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\App\Services\Ujian;
+namespace Modules\School\Http\Services\Ujian;
 
 use Illuminate\Support\Facades\DB;
 use Modules\School\Entities\UjianJawaban;
@@ -41,7 +41,7 @@ class CorrectionService
         }
         
         $db['soal_kunci'] = DB::table('soal')
-            ->where('id_kategori_submateri', $ujianJawaban->id_kategori_submateri)
+            ->where('id_subject', $ujianJawaban->subject_id)
             ->select('id as id_soal', 'jawaban as pilihan_jawaban')    
             ->get();
 
