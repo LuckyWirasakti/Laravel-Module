@@ -20,7 +20,10 @@ class MasterResource extends Resource
                 'id' => $this->group->id,
                 'name' => $this->group->name,
             ],
-            'major' => $this->major->name,
+            'group' => [
+                'id' => $this->major->id,
+                'name' => $this->major->name,
+            ],
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans()
         ];

@@ -131,8 +131,7 @@ class SoalController extends Controller
             //Upload File
             $request->file('upload')->storeAs('public/soal', $filenametostore);
 
-            $link = asset('storage/soal/' . $filenametostore);
-            return '<script type="e7b932ac4e96db3366f43b17-text/javascript">window.parent.CKEDITOR.tools.callFunction(1, "' . $link . '", "Image successfully uploaded")</script><script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="e7b932ac4e96db3366f43b17-|49" defer=""></script>';
+            return asset('storage/soal/' . $filenametostore);;
         }
         return 'gagal';
     }
