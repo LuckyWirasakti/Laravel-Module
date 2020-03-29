@@ -12,7 +12,7 @@ class GroupController extends Controller
 {
     public function index()
     {
-        return GroupResource::collection(Group::all());
+        return GroupResource::collection(Group::where('school_id', auth('school')->id())->get());
     }
 
     public function update(Request $request, $id)

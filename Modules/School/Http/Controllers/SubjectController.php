@@ -17,7 +17,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return SubjectResource::collection(Subject::with(['major', 'group'])->get());
+        return SubjectResource::collection(Subject::where('school_id',auth('school')->id())->with(['major', 'group'])->get());
     }
 
     /**
