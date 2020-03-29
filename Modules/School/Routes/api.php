@@ -48,6 +48,7 @@ Route::group(['prefix' => 'school'], function () {
             Route::get('/show','SoalController@getSoal');
             Route::put('/{id}','SoalController@update');
             Route::delete('/{id}','SoalController@destroy');
+            Route::get('/count/{id}','SoalController@countSoal');
 
         });
 

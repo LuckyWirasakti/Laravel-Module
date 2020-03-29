@@ -143,6 +143,15 @@ class SoalController extends Controller
     }
 
 
+    public function countSoal($id)
+    {
+
+        $response = [
+            'count'=>Soal::where('id_subject',$id)->count()
+        ];
+        return response()->json($response);
+    }
+
     public function update(Request $request, $id)
     {
         $kunci = $request->kunci;
@@ -219,16 +228,24 @@ class SoalController extends Controller
     {
         $soal =  Soal::find($id);
         if ($soal) {
-            $soal->delete();
-            $response = [
-                'status' => 'success',
-                'message' => 'Data berhasil dihapus',
-            ];
-            return response()->json($response);
+            $result =  $soal->delete();
+            if ($result) {
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Data berhasil dihapus',
+                ];
+                return response()->json($response);
+            } else {
+                $response = [
+                    'status' => 'failed',
+                    'message' => 'Data gagal dihapus',
+                ];
+                return response()->json($response);
+            }
         } else {
             $response = [
                 'status' => 'failed',
-                'message' => 'Data gagal dihapus',
+                'message' => 'Data tidak ditemukan',
             ];
             return response()->json($response);
         }
