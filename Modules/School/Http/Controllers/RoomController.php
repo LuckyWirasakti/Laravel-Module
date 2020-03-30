@@ -12,7 +12,7 @@ class RoomController extends Controller
     public function index()
     {
         return RoomResource::collection(
-            Room::with([
+            Room::where('school_id',auth('school')->id())->with([
                 'master'=> function($query){
                     $query->with([
                         'group',
