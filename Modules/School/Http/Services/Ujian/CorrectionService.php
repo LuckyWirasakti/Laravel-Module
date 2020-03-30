@@ -23,7 +23,8 @@ class CorrectionService
                 'dijawab' => 0,
                 'tidak_dijawab' => 0,
                 'benar' => 0,
-                'salah' => 0
+                'salah' => 0,
+                'durasi_ujian' => $ujianJawaban->durasi_ujian
             ],
             'detail' => []
         ];
