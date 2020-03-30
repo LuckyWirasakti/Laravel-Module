@@ -72,6 +72,7 @@ Route::group(['prefix' => 'participant'], function () {
             // get Soal
             Route::get('/ujian/subject/','SoalController@getSubjectSoal');
             Route::post('/ujian/submit','SoalController@submit');
+            Route::post('/ujian/cek','SoalController@cek');
         });
     });
 });
