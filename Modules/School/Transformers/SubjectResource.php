@@ -19,9 +19,18 @@ class SubjectResource extends Resource
             'id' => $this->id,
             'name' => $this->name,
             'score' => $this->score,
-            'major' => $this->major->name,
-            'group' => $this->group->name,
-            'school_id' => $this->school_id,
+            'school' => [
+                'id' => $this->school->id,
+                'name' => $this->school->name,
+            ],
+            'group' => [
+                'id' => $this->group->id,
+                'name' => $this->group->name,
+            ],
+            'major' => [
+                'id' => $this->major->id,
+                'name' => $this->major->name,
+            ],
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans()
         ];
