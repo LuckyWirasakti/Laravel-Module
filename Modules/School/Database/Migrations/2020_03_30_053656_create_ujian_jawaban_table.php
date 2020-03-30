@@ -19,10 +19,10 @@ class CreateUjianJawabanTable extends Migration
             $table->foreign('participant_id')->references('id')->on('participants');
             $table->unsignedBigInteger('subject_id');
             $table->foreign('subject_id')->references('id')->on('subjects');
-            $table->text('jawaban');
-            $table->text('koreksi');
-            $table->integer('durasi_ujian');
-            $table->double('skor');
+            $table->text('jawaban')->nullable();
+            $table->text('koreksi')->nullable();
+            $table->integer('durasi_ujian')->nullable();
+            $table->double('skor')->nullable();
         });
     }
 
