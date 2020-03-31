@@ -36,7 +36,7 @@ class MasterJob implements ShouldQueue
      */
     public function handle()
     {
-        $school_id = auth('school')->id();
+        $school_id = $this->request['school_id'];
         for ($i=0; $i < count($this->request['data']['major']); $i++) {
             $group_id = Group::firstOrCreate([
                 'name' => $this->request["data"]['group'][$i],
