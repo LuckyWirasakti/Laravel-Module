@@ -16,10 +16,22 @@ class ManageTesResource extends Resource
     {
         return [
             'id' => $this->id,
-            'school' => $this->school->name,
-            'group' => $this->group->name,
-            'major' => $this->major->name,
-            'subject' => $this->subject->name,
+            'school' => [
+                'id' => $this->school->id,
+                'name' => $this->school->name,
+            ],
+            'group' => [
+                'id' => $this->group->id,
+                'name' => $this->group->name,
+            ],
+            'major' => [
+                'id' => $this->major->id,
+                'name' => $this->major->name,
+            ],
+            'subject' => [
+                'id' => $this->subject->id,
+                'name' => $this->subject->name,
+            ],
             'duration_work' => $this->duration_work,
             'hours_implementation' => $this->hours_implementation,
             'sync_date' => $this->sync_date,

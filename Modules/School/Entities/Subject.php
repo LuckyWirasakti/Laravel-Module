@@ -19,4 +19,9 @@ class Subject extends Model
     {
         return $this->belongsTo(Major::class);
     }
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
 }

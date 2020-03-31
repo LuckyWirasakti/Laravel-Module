@@ -289,4 +289,32 @@ class SoalController extends Controller
             return response()->json($response);
         }
     }
+
+    public function cek(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'participant_id' => 'required|numeric',
+            'subject_id' => 'required|numeric',
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json($validate->errors(), 400);
+        }
+
+        $ujianDetail = UjianJawaban::where('participant_id', $request->participant_id)
+                ->where('subject_id', $request->subject_id)
+                ->exists();
+        if(!$ujianDetail) {
+            $response = [
+                'status' => false,
+                'message' => 'Belum Mengerjakan',
+            ];
+            return response()->json($response);
+        }
+        $response = [
+                'status' => true,
+                'message' => 'Sudah Mengerjakan',
+            ];
+            return response()->json($response);
+    }
 }

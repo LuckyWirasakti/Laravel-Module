@@ -15,6 +15,7 @@ class Participant extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
+    protected $guarded = [];
     protected $hidden = ['password'];
 
     public function username()
