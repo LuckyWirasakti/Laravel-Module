@@ -3,6 +3,7 @@
 namespace Modules\School\Transformers;
 
 use Illuminate\Http\Resources\Json\Resource;
+use Modules\School\Entities\Subject;
 
 class SubjectResource extends Resource
 {
@@ -14,10 +15,10 @@ class SubjectResource extends Resource
      */
     public function toArray($request)
     {
-        // return parent::toArray($request);
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'jumlah_soal' => Subject::where('id', $this->id)->count(),
             'score' => $this->score,
             'school' => [
                 'id' => $this->school->id,
