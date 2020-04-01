@@ -23,6 +23,7 @@ Route::group(['prefix' => 'school'], function () {
         });
         Route::group(['prefix' => 'major'], function () {
             Route::get('','MajorController@index');
+            Route::get('/showAll','MajorController@showAll');
         });
         Route::group(['prefix' => 'room'], function () {
             Route::get('','RoomController@index');
