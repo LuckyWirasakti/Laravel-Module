@@ -24,7 +24,8 @@ class CorrectionService
                 'tidak_dijawab' => 0,
                 'benar' => 0,
                 'salah' => 0,
-                'durasi_ujian' => $ujianJawaban->durasi_ujian
+                'durasi_ujian' => $ujianJawaban->durasi_ujian,
+                'skor'  => 0
             ],
             'detail' => []
         ];
@@ -99,6 +100,7 @@ class CorrectionService
         }
         
         $result['summary']['total_soal'] = count($data['kunci_jawaban']);
+        $result['summary']['skor'] = 100/$result['summary']['total_soal']*$result['summary']['benar'];
         $result['summary']['tidak_dijawab'] = $result['summary']['total_soal']-$result['summary']['dijawab'];
 
         return [

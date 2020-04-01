@@ -186,7 +186,7 @@ class SoalController extends Controller
     {
 
         $response = [
-            'count'=>Soal::where('id_subject',$id)->count()
+            'count' => Soal::where('id_subject',$id)->count()
         ];
         return response()->json($response);
     }
