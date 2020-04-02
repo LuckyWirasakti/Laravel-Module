@@ -65,7 +65,7 @@ class MasterJob implements ShouldQueue
             Participant::firstOrCreate([
                 'name' => $data['name'],
                 'nisn' => $data['nisn'],
-                'password' => Hash::make($data['password']),
+                'password' => Hash::make($data['password'],['rounds' => 12]),
                 'visible' => $data['password'],
                 'major_id' => Major::where('name', $data['major'])->first()->id,
                 'room_id' => Room::where('name', $data['room'])->first()->id,
