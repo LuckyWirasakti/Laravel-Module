@@ -22,6 +22,11 @@ class ParticipantController extends Controller
         return Participant::login($request);
     }
 
+    public function store(Request $request)
+    {
+        
+    }
+
     public function update(Request $request, $id)
     {
         $validate = $request->validate([
