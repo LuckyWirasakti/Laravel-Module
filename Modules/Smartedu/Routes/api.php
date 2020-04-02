@@ -31,6 +31,7 @@ Route::group(['prefix' => 'smartedu'], function () {
         Route::group(['prefix' => 'school'], function () {
             Route::get('','SchoolController@index');
             Route::post('','SchoolController@store');
+            Route::put('/{id}','SchoolController@update');
         });
     });
 });

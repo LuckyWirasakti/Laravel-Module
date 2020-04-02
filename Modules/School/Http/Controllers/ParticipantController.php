@@ -8,12 +8,13 @@ use Illuminate\Support\Facades\Validator;
 use Modules\School\Entities\Participant;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use Hash;
 
 class ParticipantController extends Controller
 {
     public function index()
     {
-        return ParticipantResource::collection(Participant::with(['group', 'major', 'room'])->where('school_id', auth('school')->id())->get());
+        return ParticipantResource::collection(Participant::with(['group','major','room', 'school'])->where('school_id', auth('school')->id())->get());
     }
 
     public function Login(ParticipantRequest $request)
@@ -52,16 +53,17 @@ class ParticipantController extends Controller
             'major_id'              => 'required',
             'room_id'               => 'required',
         ]);
-        $participant = Participant::where('nisn', $id)
-            ->update([
-                'name' => $request->name,
-                'nisn' => $request->nisn,
-                'password' => $request->password,
-                'group_id' => $request->group_id,
-                'major_id' => $request->major_id,
-                'room_id' => $request->room_id,
-            ]);
-        return response()->json(['success' => 'Berhasil Update'], 200);
+        $participant = Participant::where('id', $id)
+        ->update([
+            'name' => $request->name,
+            'nisn' => $request->nisn,
+            'visible' => $request->password,
+            'password' => Hash::make($request->password),
+            'group_id' => $request->group_id,
+            'major_id' => $request->major_id,
+            'room_id' => $request->room_id,
+        ]);
+        return ParticipantResource::collection(Participant::all());
     }
 
     public function deleteAllBysekolah($id)

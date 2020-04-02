@@ -23,6 +23,7 @@ Route::group(['prefix' => 'school'], function () {
         });
         Route::group(['prefix' => 'major'], function () {
             Route::get('','MajorController@index');
+            Route::get('/showAll','MajorController@showAll');
         });
         Route::group(['prefix' => 'room'], function () {
             Route::get('','RoomController@index');
@@ -51,10 +52,9 @@ Route::group(['prefix' => 'school'], function () {
             Route::get('/show','SoalController@getSoal');
             Route::put('/{id}','SoalController@update');
             Route::delete('/{id}','SoalController@destroy');
-            Route::get('/count/{id}','SoalController@countSoal');
-
+            
         });
-
+        
         Route::group(['prefix' => 'manage/tes'], function () {
             Route::get('', 'ManageTesController@index');
             Route::post('', 'ManageTesController@store');
@@ -69,11 +69,14 @@ Route::group(['prefix' => 'participant'], function () {
         Route::get('getmapel','DashboardParticipantController@getMapel');
         Route::post('validateToken','DashboardParticipantController@verifTokenMapel');
         Route::get('detail_informasi','DashboardParticipantController@detailInformasi');
-
+        
         Route::group(['prefix' => 'soal'], function () {
             // Ujian
             // get Soal
             Route::get('/ujian/subject/','SoalController@getSubjectSoal');
+            Route::post('/ujian/submit','SoalController@submit');
+            Route::post('/ujian/cek','SoalController@cek');
+            Route::get('/count/{id}','SoalController@countSoal');
         });
     });
 });

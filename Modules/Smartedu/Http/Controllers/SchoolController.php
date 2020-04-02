@@ -4,6 +4,7 @@ namespace Modules\Smartedu\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use Modules\Smartedu\Entities\Level;
 use Modules\Smartedu\Entities\School;
 use Modules\Smartedu\Entities\Regency;
@@ -58,4 +59,24 @@ class SchoolController extends Controller
         ]);
         return $this->index();
     }
+
+    public function update(Request $request, $id)
+    {
+        $validate = $request->validate([
+            'name'           => 'required',
+            'level_id'       => 'required',
+            'regency_id'     => 'required',
+            'province_id'    => 'required',
+        ]);
+
+        $school = School::where('id', $id)
+        ->update([
+            'name'          => $request->name,
+            'level_id'      => $request->level_id,
+            'regency_id'    => $request->regency_id,
+            'province_id'   => $request->province_id,
+        ]);
+        return response()->json(['success' => 'Berhasil Update'], 200);
+    }
+
 }

@@ -16,6 +16,11 @@ class MajorController extends Controller
         return MasterResource::collection(Master::where('school_id',auth('school')->id())->with(['group', 'major'])->get());
     }
 
+    public function showAll()
+    {
+        return MajorResource::collection(Major::where('school_id', auth('school')->id())->get());
+    }
+
     public function update(Request $request, $id)
     {
         Major::where('id', $id)

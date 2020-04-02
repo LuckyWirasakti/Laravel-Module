@@ -8,6 +8,8 @@ use Modules\School\Entities\Soal;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\School\Entities\UjianJawaban;
+use Modules\School\Http\Services\Ujian\CorrectionService;
 
 class SoalController extends Controller
 {
@@ -131,15 +133,52 @@ class SoalController extends Controller
             //Upload File
             $request->file('upload')->storeAs('public/soal', $filenametostore);
 
-            $link = asset('storage/soal/' . $filenametostore);
-            return '<script type="e7b932ac4e96db3366f43b17-text/javascript">window.parent.CKEDITOR.tools.callFunction(1, "' . $link . '", "Image successfully uploaded")</script><script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="e7b932ac4e96db3366f43b17-|49" defer=""></script>';
+            return asset('storage/soal/' . $filenametostore);;
         }
         return 'gagal';
     }
 
     public function submit(Request $request)
     {
-        $validate = Validator::make($request->all(), []);
+        $validate = Validator::make($request->all(), [
+            'participant_id' => 'required|numeric',
+            'subject_id' => 'required|numeric',
+            'jawaban' => 'required|string',
+            'durasi_ujian' => 'numeric'
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json($validate->errors(), 400);
+        }
+
+        // TODO: Cek apakah ujian masih berlaku
+        $ujianJawaban = UjianJawaban::updateOrCreate(
+            [
+                'participant_id' => $request->participant_id,
+                'subject_id' => $request->subject_id
+            ],
+            [
+                'jawaban' => $request->jawaban,
+                'durasi_ujian' => $request->durasi_ujian,
+            ]
+        );
+
+        $correctionService = new CorrectionService;
+        $correctionService = $correctionService->calculate($ujianJawaban);
+        if (!$correctionService['success']) {
+            $ujianJawaban->delete();
+
+            return response()->json([
+                'message' => $correctionService['message']
+            ], $correctionService['code']);
+        }
+        $ujianJawaban->koreksi = json_encode($correctionService['result']);
+        $ujianJawaban->save();
+
+        return response()->json([
+            'result' => $correctionService['result'],
+        ], $correctionService['code']);
+
     }
 
 
@@ -147,7 +186,7 @@ class SoalController extends Controller
     {
 
         $response = [
-            'count'=>Soal::where('id_subject',$id)->count()
+            'count' => Soal::where('id_subject',$id)->count()
         ];
         return response()->json($response);
     }
@@ -249,5 +288,33 @@ class SoalController extends Controller
             ];
             return response()->json($response);
         }
+    }
+
+    public function cek(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'participant_id' => 'required|numeric',
+            'subject_id' => 'required|numeric',
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json($validate->errors(), 400);
+        }
+
+        $ujianDetail = UjianJawaban::where('participant_id', $request->participant_id)
+                ->where('subject_id', $request->subject_id)
+                ->exists();
+        if(!$ujianDetail) {
+            $response = [
+                'status' => false,
+                'message' => 'Belum Mengerjakan',
+            ];
+            return response()->json($response);
+        }
+        $response = [
+                'status' => true,
+                'message' => 'Sudah Mengerjakan',
+            ];
+            return response()->json($response);
     }
 }
