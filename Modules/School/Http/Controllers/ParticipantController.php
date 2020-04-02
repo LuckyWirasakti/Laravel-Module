@@ -24,7 +24,23 @@ class ParticipantController extends Controller
 
     public function store(Request $request)
     {
-        
+        $add = new Participant;
+
+        $add->name = $request->name;
+        $add->nisn = $request->nisn;
+        $add->visible = $request->password;
+        $add->password = $request->password;
+        $add->group_id = $request->group_id;
+        $add->major_id = $request->major_id;
+        $add->room_id = $request->room_id;
+        $add->school_id = $request->school_id;
+
+        $result =  $add->save();
+        if ($result) {
+            return response()->json(['success' => 'Berhasil Menambah Participant'], 200);
+        } else {
+            return response()->json(['error' => 'Gagal Menambah Participant'], 400);
+        }
     }
 
     public function update(Request $request, $id)
@@ -53,9 +69,9 @@ class ParticipantController extends Controller
     public function deleteAllBysekolah($id)
     {
         $participant = Participant::where('school_id', $id)->delete();
-        if($participant) {
+        if ($participant) {
             return response()->json(['success' => 'Berhasil dihapus'], 200);
-        }else{
+        } else {
             return response()->json(['error' => 'Not Found'], 404);
         }
     }
@@ -63,10 +79,10 @@ class ParticipantController extends Controller
     public function deleteParticipant($id)
     {
         $participant = Participant::find($id);
-        if($participant) {
+        if ($participant) {
             $participant->delete();
             return response()->json(['success' => 'Berhasil dihapus'], 200);
-        }else{
+        } else {
             return response()->json(['error' => 'Not Found'], 404);
         }
     }
