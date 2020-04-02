@@ -17,7 +17,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return SubjectResource::collection(Subject::where('school_id',auth('school')->id())->with(['major', 'group'])->get());
+        return SubjectResource::collection(Subject::where('school_id', auth('school')->id())->with(['major', 'group'])->get());
     }
 
     /**
@@ -26,7 +26,6 @@ class SubjectController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -76,7 +75,13 @@ class SubjectController extends Controller
     public function update(Request $request, $id)
     {
         $subject = Subject::findOrFail($id);
-        $subject->fill($request->all())->save();
+        $result = $subject->fill($request->all())->save();
+
+        if ($result) {
+            return response()->json(['success' => 'Berhasil Mengubah Subject'], 200);
+        } else {
+            return response()->json(['error' => 'Gagal Mengubah Subject'], 400);
+        }
     }
 
     /**
@@ -86,6 +91,16 @@ class SubjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $subject = Subject::find($id);
+        if ($subject) {
+            $result = $subject->delete();
+            if ($result) {
+                return response()->json(['success' => 'Berhasil Menghapus Subject'], 200);
+            } else {
+                return response()->json(['error' => 'Gagal Menghapus Subject'], 400);
+            }
+        } else {
+            return response()->json(['error' => "Data dengan id $id tidak ada"], 400);
+        }
     }
 }

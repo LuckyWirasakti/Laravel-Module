@@ -33,10 +33,13 @@ Route::group(['prefix' => 'school'], function () {
         });
         Route::group(['prefix' => 'subject'], function () {
             Route::get('','SubjectController@index');
+            Route::put('/edit/{id}','SubjectController@update');
             Route::post('','SubjectController@store');
+            Route::delete('/{id}','SubjectController@destroy');
         });
         Route::group(['prefix' => 'participant'], function () {
             Route::get('','ParticipantController@index');
+            Route::post('/add','ParticipantController@store');
             Route::delete('/{id}/deleteAll', 'ParticipantController@deleteAllBysekolah');
             Route::delete('/{id}','ParticipantController@deleteParticipant');
             Route::put('/{id}','ParticipantController@update');
