@@ -8,9 +8,19 @@ use Modules\School\Entities\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use DB;
+use Hash;
 
 class DashboardParticipantController extends Controller
 {
+
+    public function tess()
+    {
+        if(Hash::check('NXU4ZL','$2y$10$FcxW3Fa1iV5D/O3UoXvpVOqCFU1DnVhwotNLM7KWf9.NFTv8jinou')) {
+            return 'oke';
+        }else{
+            return 'false';
+        }
+    }
 
     public function getMapel(Request $request)
     {

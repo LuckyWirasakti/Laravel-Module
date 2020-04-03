@@ -67,9 +67,9 @@ class MasterJob implements ShouldQueue
                 'nisn' => $data['nisn'],
                 'password' => Hash::make($data['password'],['rounds' => 12]),
                 'visible' => $data['password'],
-                'major_id' => Major::where('name', $data['major'])->first()->id,
-                'room_id' => Room::where('name', $data['room'])->first()->id,
-                'group_id' => Group::where('name', $data['group'])->first()->id,
+                'major_id' => Major::where('major_id', $major_id),
+                'room_id' => Room::where('master_id', $master_id),
+                'group_id' => Group::where('group_id', $group_id),
                 'school_id' => $school_id
             ]);
         }
