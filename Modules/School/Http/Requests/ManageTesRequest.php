@@ -14,9 +14,9 @@ class ManageTesRequest extends FormRequest
     public function rules()
     {
         return [
-            'group_id' => 'required|numeric|max:10',
-            'major_id' => 'required|numeric|max:10',
-            'subject_id' => 'required|numeric|max:10',
+            'group_id' => 'required|numeric',
+            'major_id' => 'required|numeric',
+            'subject_id' => 'required|numeric',
             'duration_work' => 'required',
             'hours_implementation' => 'required',
             'sync_date' => 'required',
