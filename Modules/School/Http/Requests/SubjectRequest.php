@@ -15,8 +15,8 @@ class SubjectRequest extends FormRequest
     {
         return [
             'name' => 'required|max:191',
-            'group_id' => 'required|numeric|max:10',
-            'major_id' => 'required|numeric|max:10',
+            'group_id' => 'required|numeric',
+            'major_id' => 'required|numeric',
             'score' => 'required',
             'school_id' => 'required'
         ];
