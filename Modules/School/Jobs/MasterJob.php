@@ -13,6 +13,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Modules\School\Entities\Participant;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use DB;
 
 class MasterJob implements ShouldQueue
 {
@@ -62,14 +63,16 @@ class MasterJob implements ShouldQueue
         }
 
         foreach($this->request['data']['participant'] as $data){
+		$pool = '123456789ABCDEFGHJKLMNPRSTUVWXYZ';
+        $passRand = substr(str_shuffle(str_repeat($pool, 5)), 0, 6);
             Participant::firstOrCreate([
                 'name' => $data['name'],
                 'nisn' => $data['nisn'],
-                'password' => Hash::make($data['password'],['rounds' => 12]),
-                'visible' => $data['password'],
-                'major_id' => Major::where('major_id', $major_id),
-                'room_id' => Room::where('master_id', $master_id),
-                'group_id' => Group::where('group_id', $group_id),
+                'password' => Hash::make($passRand),
+                'visible' => $passRand,
+                'major_id' => Major::where('name', $data['major'])->where('school_id', $school_id)->first()->id,
+                'room_id' => DB::table('rooms')->select('rooms.id as id_room', 'majors.name as majoor_name')->join('masters', 'masters.id', '=', 'rooms.master_id')->join('majors', 'majors.id', '=', 'masters.major_id')->where('rooms.school_id', $school_id)->where('majors.name', 'LIKE', '%' .$data['major']. '%')->first()->id_room,
+                'group_id' => Group::where('name', $data['group'])->where('school_id', $school_id)->first()->id,
                 'school_id' => $school_id
             ]);
         }
