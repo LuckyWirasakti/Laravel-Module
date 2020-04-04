@@ -14,7 +14,7 @@ class SoalRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_subject'    => 'required|numeric|max:10',
+            'id_subject'    => 'required|numeric',
             'pertanyaan'    => 'required',
             'kunci'         => 'required',
             'pembahasan'    => 'required',
