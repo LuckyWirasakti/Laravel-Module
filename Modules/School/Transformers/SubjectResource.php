@@ -3,7 +3,7 @@
 namespace Modules\School\Transformers;
 
 use Illuminate\Http\Resources\Json\Resource;
-use Modules\School\Entities\Subject;
+use Modules\School\Entities\Soal;
 
 class SubjectResource extends Resource
 {
@@ -18,7 +18,7 @@ class SubjectResource extends Resource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'jumlah_soal' => Subject::where('id', $this->id)->count(),
+            'jumlah_soal' => Soal::where('id_subject', $this->id)->count(),
             'score' => $this->score,
             'school' => [
                 'id' => $this->school->id,
