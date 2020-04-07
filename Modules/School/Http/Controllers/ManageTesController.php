@@ -18,7 +18,7 @@ class ManageTesController extends Controller
     public function index(Request $request)
     {
         if ($request->hari) {
-            return ManageTesResource::collection(ManageTes::where(['day', $request->hari,'school_id',auth('school')->id()])->with(['major', 'group'])->get());
+            return ManageTesResource::collection(ManageTes::where('day', $request->hari)->where('school_id', auth('school')->id())->with(['major', 'group'])->get());
         }
         return ManageTesResource::collection(ManageTes::where('school_id', auth('school')->id())->with(['major', 'group'])->get());
     }
