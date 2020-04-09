@@ -173,6 +173,7 @@ class SoalController extends Controller
             ], $correctionService['code']);
         }
         $ujianJawaban->koreksi = json_encode($correctionService['result']);
+        $ujianJawaban->skor = $correctionService['result']['summary']['skor'];
         $ujianJawaban->save();
 
         return response()->json([
