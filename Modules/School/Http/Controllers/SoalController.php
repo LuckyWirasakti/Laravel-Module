@@ -121,23 +121,6 @@ class SoalController extends Controller
         return response()->json($db['soal'], 200);
     }
 
-    public function fileUpload(Request $request)
-    {
-        if ($request->hasFile('upload') && $request->file('upload')->isValid()) {
-            //get extension
-            $filenamewithextension = $request->file('upload')->getClientOriginalName();
-            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-            $extension = $request->file('upload')->getClientOriginalExtension();
-            $filenametostore = $filename . '_' . time() . '.' . $extension;
-
-            //Upload File
-            $request->file('upload')->storeAs('public/soal', $filenametostore);
-
-            return asset('storage/soal/' . $filenametostore);;
-        }
-        return 'gagal';
-    }
-
     public function submit(Request $request)
     {
         $validate = Validator::make($request->all(), [
