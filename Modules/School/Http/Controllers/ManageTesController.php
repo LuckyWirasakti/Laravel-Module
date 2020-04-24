@@ -33,7 +33,6 @@ class ManageTesController extends Controller
                 $request->all(),
                 [
                     'school_id' => auth('school')->id(),
-                    'token' => $passRand,
                     'day' => $request->day
                 ]
             )
