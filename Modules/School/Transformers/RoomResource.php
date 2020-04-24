@@ -17,14 +17,13 @@ class RoomResource extends Resource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'master_id' => $this->master->id,
             'major' => [
-                'id' => $this->master->major->id,
-                'name' => $this->master->major->name
+                'id' => $this->major->id,
+                'name' => $this->major->name
             ],
             'group' => [
-                'id' => $this->master->group->id,
-                'name' => $this->master->group->name
+                'id' => $this->major->group->id,
+                'name' => $this->major->group->name
             ],
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans()

@@ -16,13 +16,9 @@ class CreateManageTesTable extends Migration
         Schema::create('manage_tes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('school_id')->unsigned();
-            $table->foreign('school_id')->references('id')->on('schools');
             $table->integer('group_id')->unsigned();
-            $table->foreign('group_id')->references('id')->on('groups');
             $table->integer('major_id')->unsigned();
-            $table->foreign('major_id')->references('id')->on('majors');
             $table->unsignedBigInteger('subject_id');
-            $table->foreign('subject_id')->references('id')->on('subjects');
             $table->integer('duration_work');
             $table->time('hours_implementation');
             $table->date('sync_date');

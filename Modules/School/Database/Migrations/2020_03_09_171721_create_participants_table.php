@@ -16,13 +16,13 @@ class CreateParticipantsTable extends Migration
         Schema::create('participants', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('nisn');
+            $table->string('nisn');
             $table->string('visible');
             $table->string('password');
+            $table->integer('group_id')->unsigned();
             $table->integer('major_id')->unsigned();
-            $table->foreign('major_id')->references('id')->on('majors');
             $table->integer('room_id')->unsigned();
-            $table->foreign('room_id')->references('id')->on('rooms');
+            $table->integer('school_id')->unsigned();
             $table->timestamps();
         });
     }

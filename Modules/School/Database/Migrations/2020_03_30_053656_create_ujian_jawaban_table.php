@@ -16,9 +16,7 @@ class CreateUjianJawabanTable extends Migration
         Schema::create('ujian_jawaban', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('participant_id')->unsigned();
-            $table->foreign('participant_id')->references('id')->on('participants');
             $table->unsignedBigInteger('subject_id');
-            $table->foreign('subject_id')->references('id')->on('subjects');
             $table->text('jawaban')->nullable();
             $table->text('koreksi')->nullable();
             $table->integer('durasi_ujian')->nullable();

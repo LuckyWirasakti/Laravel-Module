@@ -17,12 +17,10 @@ class CreateSchoolsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('province_id')->unsigned();
-            $table->foreign('province_id')->references('id')->on('provinces');
             $table->integer('regency_id')->unsigned();
-            $table->foreign('regency_id')->references('id')->on('regencies');
             $table->integer('level_id')->unsigned();
-            $table->foreign('level_id')->references('id')->on('levels');
             $table->string('username');
+            $table->string('visible');
             $table->string('password');
             $table->timestamps();
         });

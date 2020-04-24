@@ -46,32 +46,38 @@ class MasterJob implements ShouldQueue
 
             $major_id = Major::firstOrCreate([
                 'name' => $this->request["data"]['major'][$i],
-                'school_id' => $school_id
+                'school_id' => $school_id,
+				'group_id' => $group_id
             ])->id;
-
-            $master_id = Master::firstOrCreate([
-                'group_id' => $group_id,
+			
+			$room = Room::firstOrCreate([
+                'name' => $this->request["data"]['room'][$i],
                 'major_id' => $major_id,
                 'school_id' => $school_id
             ])->id;
-
-            Room::firstOrCreate([
-                'name' => $this->request["data"]['room'][$i],
-                'master_id' => $master_id,
+			
+			Master::firstOrCreate([
+                'group_id' => $group_id,
+                'major_id' => $major_id,
+				'room_id'  => $room,
                 'school_id' => $school_id
             ]);
+			
         }
 
         foreach($this->request['data']['participant'] as $data){
 		$pool = '123456789ABCDEFGHJKLMNPRSTUVWXYZ';
         $passRand = substr(str_shuffle(str_repeat($pool, 5)), 0, 6);
+        $group = Group::where('name', $data['group'])->where('school_id', $school_id)->first()->id;
+        $major = Major::where('name', $data['major'])->where('school_id', $school_id)->where('group_id', $group)->first()->id;
+			
             Participant::firstOrCreate([
                 'name' => $data['name'],
                 'nisn' => $data['nisn'],
                 'password' => Hash::make($passRand),
                 'visible' => $passRand,
                 'major_id' => Major::where('name', $data['major'])->where('school_id', $school_id)->first()->id,
-                'room_id' => DB::table('rooms')->select('rooms.id as id_room', 'majors.name as majoor_name')->join('masters', 'masters.id', '=', 'rooms.master_id')->join('majors', 'majors.id', '=', 'masters.major_id')->where('rooms.school_id', $school_id)->where('majors.name', 'LIKE', '%' .$data['major']. '%')->first()->id_room,
+                'room_id' => Room::where('name', $data['room'])->where('major_id', $major)->where('school_id', $school_id)->first()->id,
                 'group_id' => Group::where('name', $data['group'])->where('school_id', $school_id)->first()->id,
                 'school_id' => $school_id
             ]);

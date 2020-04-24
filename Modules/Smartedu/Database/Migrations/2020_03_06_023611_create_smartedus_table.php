@@ -20,6 +20,7 @@ class CreateSmartedusTable extends Migration
             $table->string('photo');
             $table->string('email')->unique();
             $table->string('password');
+            $table->integer('role_id')->unsigned();
             $table->timestamps();
         });
     }
