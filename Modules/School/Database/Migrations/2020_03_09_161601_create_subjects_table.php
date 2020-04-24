@@ -14,13 +14,12 @@ class CreateSubjectsTable extends Migration
     public function up()
     {
         Schema::create('subjects', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name');
             $table->integer('score');
             $table->integer('major_id')->unsigned();
-            $table->foreign('major_id')->references('id')->on('majors');
             $table->integer('group_id')->unsigned();
-            $table->foreign('group_id')->references('id')->on('groups');
+            $table->integer('school_id')->unsigned();
             $table->timestamps();
         });
     }

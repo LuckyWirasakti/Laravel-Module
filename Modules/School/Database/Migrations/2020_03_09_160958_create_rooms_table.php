@@ -17,9 +17,7 @@ class CreateRoomsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('major_id')->unsigned();
-            $table->foreign('major_id')->references('id')->on('majors');
-            $table->integer('group_id')->unsigned();
-            $table->foreign('group_id')->references('id')->on('groups');
+            $table->integer('school_id')->unsigned();
             $table->timestamps();
         });
     }

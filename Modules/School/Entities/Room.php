@@ -12,4 +12,10 @@ class Room extends Model
     {
         return $this->belongsTo(Master::class);
     }
+	
+	public function major()
+    {
+        return $this->belongsTo(Major::class);
+    }
+	
 }
