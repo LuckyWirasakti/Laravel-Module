@@ -25,9 +25,6 @@ class ManageTesController extends Controller
 
     public function store(ManageTesRequest $request)
     {
-        $pool = '123456789ABCDEFGHJKLMNPRSTUVWXYZ';
-        $passRand = substr(str_shuffle(str_repeat($pool, 5)), 0, 6);
-
         $manageTes = ManageTes::create(
             array_merge(
                 $request->all(),
@@ -107,6 +104,32 @@ class ManageTesController extends Controller
             $response = [
                 'status' => 'failed',
                 'message' => 'Data gagal dihapus',
+            ];
+            return response()->json($response);
+        }
+    }
+
+    public function mulai(Request $request)
+    {
+        $pool = '123456789ABCDEFGHJKLMNPRSTUVWXYZ';
+        $passRand = substr(str_shuffle(str_repeat($pool, 5)), 0, 6);
+
+        $manageTes = ManageTes::find($request->id);
+        if($manageTes){
+            $manageTes->update([
+                'token' => $passRand,
+                'status' => 1
+            ]);
+            $response = [
+                'status' => 'success',
+                'message' => 'Manage Tes berhasil di mulai.',
+                'data' => $manageTes
+            ];
+            return response()->json($response);
+        }else{
+            $response = [
+                'status' => 'Failed',
+                'message' => 'Id manage tes tidak ada.',
             ];
             return response()->json($response);
         }
