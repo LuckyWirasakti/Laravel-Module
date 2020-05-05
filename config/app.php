@@ -171,7 +171,7 @@ return [
          */
         Smartedu\Providers\AppServiceProvider::class,
         Smartedu\Providers\AuthServiceProvider::class,
-        // Smartedu\Providers\BroadcastServiceProvider::class,
+        Smartedu\Providers\BroadcastServiceProvider::class,
         Smartedu\Providers\EventServiceProvider::class,
         Smartedu\Providers\RouteServiceProvider::class,
 

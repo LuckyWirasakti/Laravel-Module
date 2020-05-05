@@ -8,6 +8,8 @@ use Modules\School\Entities\ManageTes;
 use Modules\School\Transformers\ManageTesResource;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+use Modules\School\Events\StopTes;
+use Pusher\Laravel\Facades\Pusher;
 
 class ManageTesController extends Controller
 {
@@ -123,6 +125,30 @@ class ManageTesController extends Controller
             $response = [
                 'status' => 'success',
                 'message' => 'Manage Tes berhasil di mulai.',
+                'data' => $manageTes
+            ];
+            return response()->json($response);
+        }else{
+            $response = [
+                'status' => 'Failed',
+                'message' => 'Id manage tes tidak ada.',
+            ];
+            return response()->json($response);
+        }
+    }
+
+    public function akhiri(Request $request)
+    {
+        $manageTes = ManageTes::find($request->id);
+        if($manageTes){
+            $manageTes->update([
+                'token' => '',
+                'status' => 0
+            ]);
+            Pusher::trigger('my-mappel', $request->id, ['message' => 'Sesi ujian ini telah diakhiri']);
+            $response = [
+                'status' => 'success',
+                'message' => 'Manage Tes berhasil di akhiri.',
                 'data' => $manageTes
             ];
             return response()->json($response);

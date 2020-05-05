@@ -59,6 +59,7 @@ Route::group(['prefix' => 'school'], function () {
         Route::group(['prefix' => 'manage/tes'], function () {
             Route::get('', 'ManageTesController@index');
             Route::post('/mulai', 'ManageTesController@mulai');
+            Route::post('/akhiri', 'ManageTesController@akhiri');
             Route::post('', 'ManageTesController@store');
             Route::put('/{id}', 'ManageTesController@update');
             Route::delete('/{id}', 'ManageTesController@destroy');
