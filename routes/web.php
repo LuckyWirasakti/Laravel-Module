@@ -1,5 +1,5 @@
 <?php
-
+use Modules\School\Events\StopTes;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,4 +13,9 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('test', function () {
+    event(new Modules\School\Events\StopTes('Someone'));
+    return "Event has been sent!";
 });
