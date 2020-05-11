@@ -64,6 +64,7 @@ Route::group(['prefix' => 'school'], function () {
             Route::put('/{id}', 'ManageTesController@update');
             Route::delete('/{id}', 'ManageTesController@destroy');
         });
+        Route::get('recap', 'AssessmentController@recap');
     });
 });
 

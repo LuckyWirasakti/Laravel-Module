@@ -11,4 +11,9 @@ class UjianJawaban extends Model
     protected $guarded = ['id'];
 
     public $timestamps = false;
+
+    public function participant()
+    {
+        return $this->belongsTo(Participant::class);
+    }
 }
