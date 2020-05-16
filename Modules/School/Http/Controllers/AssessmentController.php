@@ -19,7 +19,7 @@ class AssessmentController extends Controller
     {
         $examResult = UjianJawaban::with('participant')->has('participant');
         $examResult->whereHas('participant', function ($query) use ($request) {
-            $query->where('participants.school_id', auth('school')->id());
+            $query->where('school_id', auth('school')->id());
         });
 
         if ($request->has('group_id')) {
