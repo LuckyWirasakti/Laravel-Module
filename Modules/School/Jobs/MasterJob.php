@@ -20,6 +20,7 @@ class MasterJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $request;
+	
     /**
      * Create a new job instance.
      *
@@ -27,7 +28,7 @@ class MasterJob implements ShouldQueue
      */
     public function __construct($request)
     {
-        $this->request = $request;
+		$this->request = $request;
     }
 
     /**
@@ -68,17 +69,19 @@ class MasterJob implements ShouldQueue
         foreach($this->request['data']['participant'] as $data){
 		$pool = '123456789ABCDEFGHJKLMNPRSTUVWXYZ';
         $passRand = substr(str_shuffle(str_repeat($pool, 5)), 0, 6);
+			
         $group = Group::where('name', $data['group'])->where('school_id', $school_id)->first()->id;
         $major = Major::where('name', $data['major'])->where('school_id', $school_id)->where('group_id', $group)->first()->id;
+		$room = Room::where('name', $data['room'])->where('major_id', $major)->where('school_id', $school_id)->first()->id;
 			
-            Participant::firstOrCreate([
+            $participant = Participant::firstOrCreate([
                 'name' => $data['name'],
                 'nisn' => $data['nisn'],
                 'password' => Hash::make($passRand),
                 'visible' => $passRand,
-                'major_id' => Major::where('name', $data['major'])->where('school_id', $school_id)->first()->id,
-                'room_id' => Room::where('name', $data['room'])->where('major_id', $major)->where('school_id', $school_id)->first()->id,
-                'group_id' => Group::where('name', $data['group'])->where('school_id', $school_id)->first()->id,
+                'major_id' => $major,
+                'room_id' => $room,
+                'group_id' => $group,
                 'school_id' => $school_id
             ]);
         }

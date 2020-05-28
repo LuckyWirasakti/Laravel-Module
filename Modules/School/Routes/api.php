@@ -19,6 +19,7 @@ Route::group(['prefix' => 'school'], function () {
     Route::post('login', 'SchoolController@login');
     Route::post('login/siswa', 'ParticipantController@login');
     Route::group(['middleware' => 'auth:school'], function () {
+        Route::put('','ParticipantController@update');
         Route::group(['prefix' => 'group'], function () {
             Route::get('','GroupController@index');
         });
@@ -70,6 +71,9 @@ Route::group(['prefix' => 'school'], function () {
 
 Route::group(['prefix' => 'participant'], function () {
     Route::group(['middleware' => 'auth:participant'], function () {
+        Route::get('profile','DashboardParticipantController@profile');
+        Route::post('profile','DashboardParticipantController@update');
+        
         Route::get('getmapel','DashboardParticipantController@getMapel');
         Route::post('validateToken','DashboardParticipantController@verifTokenMapel');
         Route::get('detail_informasi','DashboardParticipantController@detailInformasi');
