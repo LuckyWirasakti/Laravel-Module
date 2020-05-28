@@ -13,4 +13,9 @@ class SchoolController extends Controller
         return School::login($request);
     }
 
+    public function update(Request $request)
+    {
+        
+    }
+
 }

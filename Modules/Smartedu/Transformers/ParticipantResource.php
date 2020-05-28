@@ -20,6 +20,13 @@ class ParticipantResource extends Resource
             'name' => $this->name,
             'nisn' => $this->nisn,
             'password' => $this->visible,
+            'user_email' => $this->email,
+            'user_phone' => $this->phone,
+            'user_tempat_lahir' => $this->tempat_lahir,
+            'user_tanggal_lahir' => $this->tanggal_lahir,
+            'user_orangtua' => $this->nama_orang_tua,
+            'user_phone_orangtua' => $this->phone_orang_tua,
+            'user_foto' => $this->foto,
             'group' => [
                 'id' => $this->group->id,
                 'name' => $this->group->name

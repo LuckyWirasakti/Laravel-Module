@@ -2,6 +2,7 @@
 
 namespace Modules\School\Http\Controllers;
 
+use Modules\Smartedu\Transformers\ParticipantResource;
 use Illuminate\Routing\Controller;
 use Modules\School\Entities\ManageTes;
 use Modules\School\Entities\Participant;
@@ -97,7 +98,42 @@ class DashboardParticipantController extends Controller
         ];
 
         return response()->json($response);
+    }
 
+    public function profile()
+    {
+        return ParticipantResource::collection(Participant::where('id', auth('participant')->id())->get());
+    }
 
+    public function update(Request $request)
+    {
+        $participant = Participant::where('id', auth('participant')->id())->first();
+
+        if($participant)
+        {
+            if($request->hasFile('foto')){
+                $destination_path = './uploads/profile/';
+                $request->validate([
+                    'foto' => 'required|mimes:jpg,jpeg,png|max:1048',
+                ]);
+        
+                $namafoto = time().'.'.$request->foto->extension();
+                $request->foto->move($destination_path, $namafoto);
+            }else{
+                $namafoto = $participant->foto;
+            }
+            $participant->update([
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'nama_orang_tua' => $request->nama_orang_tua,
+                'phone_orang_tua' => $request->phone_orang_tua,
+                'foto' => $namafoto,
+            ]);
+            return ParticipantResource::collection(Participant::where('id', auth('participant')->id())->get());
+        }else{
+            return response()->json(['message' => 'id Participant Tidak ada']);   
+        }
     }
 }

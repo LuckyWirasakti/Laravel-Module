@@ -43,6 +43,13 @@ class ParticipantResource extends Resource
             'user_id' => $this->user->id,
             'user_name' => $this->user->name,
             'user_nisn' => $this->user->nisn,
+            'user_email' => $this->user->email,
+            'user_phone' => $this->user->phone,
+            'user_tempat_lahir' => $this->user->tempat_lahir,
+            'user_tanggal_lahir' => $this->user->tanggal_lahir,
+            'user_orangtua' => $this->user->nama_orang_tua,
+            'user_phone_orangtua' => $this->user->phone_orang_tua,
+            'user_foto' => $this->user->foto,
             'data' => $data,
             'user_created_at' => $this->user->created_at->diffForHumans(),
         ];
