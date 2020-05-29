@@ -91,4 +91,5 @@ Route::group(['prefix' => 'participant'], function () {
 
 
 // file upload
-Route::post('/soal/file/upload','SoalController@fileUpload');;
+// Route::post('/soal/file/upload','SoalController@fileUpload');;
+Route::post('/soal/file/upload','SoalController@imageUploadPost');;
