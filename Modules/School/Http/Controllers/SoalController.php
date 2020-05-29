@@ -304,14 +304,21 @@ class SoalController extends Controller
 
     public function imageUploadPost(Request $request)
     {
-        $validate = $request()->validate([
-            'upload' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1048',
+        $validate = Validator::make($request->all(), [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1048',
         ]);
+
         $imageName = time().'.'.request()->image->getClientOriginalExtension();
-        $request()->image->move(public_path('uploads'), $imageName);
-        $location = 's';
+        $request->image->move(public_path('uploads'), $imageName);
+        $location = public_path('uploads') . "/". $imageName;
 
         if($validate->fails()) {
+            $response = [
+                'status' => false,
+                'message' => 'failed',
+            ];
+            return response()->json($response);
+        }else{
             $response = [
                 'status' => 'true',
                 'message' => 'success',
@@ -321,12 +328,8 @@ class SoalController extends Controller
                     '1024' => $location,
                     '1920' => $location,
                 ]
-                ];
-        }else{
-            $response = [
-                'status' => false,
-                'message' => 'failed',
             ];
+            return response()->json($response);
         }
 
     }
