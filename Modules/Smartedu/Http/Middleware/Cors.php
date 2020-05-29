@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\School\Http\Middleware;
+namespace Modules\Smartedu\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
