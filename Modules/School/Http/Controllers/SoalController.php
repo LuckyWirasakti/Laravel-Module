@@ -308,10 +308,6 @@ class SoalController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1048',
         ]);
 
-        $imageName = time().'.'.request()->image->getClientOriginalExtension();
-        $request->image->move(public_path('uploads'), $imageName);
-        $location = public_path('uploads') . "/". $imageName;
-
         if($validate->fails()) {
             $response = [
                 'status' => false,
@@ -319,6 +315,10 @@ class SoalController extends Controller
             ];
             return response()->json($response);
         }else{
+            $imageName = time().'.'.request()->image->getClientOriginalExtension();
+            $request->image->move(public_path('uploads'), $imageName);
+            $location = "http://cbt-api.smknukesesi.sch.id/uploads/" . $imageName;
+
             $response = [
                 'status' => 'true',
                 'message' => 'success',
