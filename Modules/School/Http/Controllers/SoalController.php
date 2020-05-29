@@ -312,6 +312,7 @@ class SoalController extends Controller
             $response = [
                 'status' => false,
                 'message' => 'failed',
+                'error' => $validate->errors()
             ];
             return response()->json($response);
         }else{
