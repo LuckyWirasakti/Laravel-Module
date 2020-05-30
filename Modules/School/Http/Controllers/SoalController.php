@@ -305,7 +305,7 @@ class SoalController extends Controller
     public function imageUploadPost(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1048',
+            'upload' => 'required|upload|mimes:jpeg,png,jpg,gif,svg|max:1048',
         ]);
 
         if($validate->fails()) {
@@ -316,7 +316,7 @@ class SoalController extends Controller
             ];
             return response()->json($response);
         }else{
-            $imageName = time().'.'.request()->image->getClientOriginalExtension();
+            $imageName = time().'.'.request()->upload->getClientOriginalExtension();
             $request->image->move(public_path('uploads'), $imageName);
             $location = "http://cbt-api.smknukesesi.sch.id/uploads/" . $imageName;
 
