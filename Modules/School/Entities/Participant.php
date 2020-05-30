@@ -38,6 +38,11 @@ class Participant extends Authenticatable implements JWTSubject
         ];
     }
 
+    public function getClassroomAttribute()
+    {
+        $this->loadMissing('group', 'major', 'room');
+        return "{$this->group->name} {$this->major->name} {$this->room->name}";
+    }
 
     public function group()
     {

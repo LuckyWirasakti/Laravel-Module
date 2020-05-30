@@ -17,6 +17,7 @@ class RecapResource extends Resource
         return [
             'user_nisn' => $this->participant->nisn,
             'user_name' => $this->participant->name,
+            'user_classroom' => $this->participant->classroom,
             'exam_score' => $this->skor
         ];
     }

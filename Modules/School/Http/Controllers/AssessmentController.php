@@ -17,7 +17,14 @@ class AssessmentController extends Controller
      */
     public function recap(AssessmentFilterRequest $request)
     {
-        $examResult = UjianJawaban::with('participant')->has('participant');
+        $relations = [
+            'participant',
+            'participant.group',
+            'participant.major',
+            'participant.room',
+        ];
+
+        $examResult = UjianJawaban::with($relations)->has('participant');
         $examResult->whereHas('participant', function ($query) use ($request) {
             $query->where('school_id', auth('school')->id());
         });
