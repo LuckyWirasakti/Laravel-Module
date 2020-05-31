@@ -318,7 +318,7 @@ class SoalController extends Controller
         }else{
             $imageName = time().'.'.request()->upload->getClientOriginalExtension();
             $request->upload->move(public_path('uploads'), $imageName);
-            $location = "http://cbt-api.smknukesesi.sch.id/uploads/" . $imageName;
+            $location = "https://cbt-api.smknukesesi.sch.id/uploads/" . $imageName;
 
             $response = [
                 'status' => 'true',
