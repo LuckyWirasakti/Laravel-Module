@@ -33,7 +33,7 @@ class Participant extends Authenticatable implements JWTSubject
         return [
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth('participant')->factory()->getTTL() * 60 * 3,
+            'expires_in' => auth('participant')->factory()->getTTL() * 180 * 3,
             'user' => auth('participant')->user()
         ];
     }
