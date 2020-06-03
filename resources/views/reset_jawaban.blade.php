@@ -18,7 +18,7 @@
         <tr>
             <td>{{ $data->name }}</td>
             <td>{{ $data->mapel }}</td>
-            <td><a href="{{route ('resetdelete', $data->id_participant) }}">Hapus</a></td>
+            <td><a href="{{ url('/resetdelete') }}/{{ $data->id_participant}}/{{$data->subject_id}}">Hapus</a></td>
         </tr>
     @endforeach
     </table>
