@@ -147,7 +147,7 @@ class SoalController extends Controller
         );
 
         $correctionService = new CorrectionService;
-        $correctionService = $correctionService->calculate($ujianJawaban);
+        $correctionService = $correctionService->calculate($ujianJawaban, $request->total_soal);
         if (!$correctionService['success']) {
             $ujianJawaban->delete();
 

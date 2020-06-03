@@ -7,7 +7,7 @@ use Modules\School\Entities\UjianJawaban;
 
 class CorrectionService
 {
-    public function calculate(UjianJawaban $ujianJawaban)
+    public function calculate(UjianJawaban $ujianJawaban, int $totalSoal)
     {
         if ($ujianJawaban == null) {
             return [
@@ -19,7 +19,7 @@ class CorrectionService
         
         $result = [
             'summary' => [
-                'total_soal' => 0,
+                'total_soal' => $totalSoal,
                 'dijawab' => 0,
                 'tidak_dijawab' => 0,
                 'benar' => 0,
@@ -99,7 +99,7 @@ class CorrectionService
             // ];
         }
         
-        $result['summary']['total_soal'] = count($data['kunci_jawaban']);
+        // $result['summary']['total_soal'] = count($data['kunci_jawaban']);
         $result['summary']['skor'] = 100/$result['summary']['total_soal']*$result['summary']['benar'];
         $result['summary']['tidak_dijawab'] = $result['summary']['total_soal']-$result['summary']['dijawab'];
 
