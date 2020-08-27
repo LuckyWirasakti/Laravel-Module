@@ -7,8 +7,8 @@ use Modules\School\Entities\UjianJawaban;
 
 class CorrectionService
 {
-    public function calculate(UjianJawaban $ujianJawaban)
-    // public function calculate(UjianJawaban $ujianJawaban, int $totalSoal)
+    // public function calculate(UjianJawaban $ujianJawaban)
+    public function calculate(UjianJawaban $ujianJawaban, int $totalSoal)
     {
         if ($ujianJawaban == null) {
             return [
