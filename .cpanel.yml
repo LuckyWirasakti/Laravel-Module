@@ -1,0 +1,5 @@
+---
+deployment:
+ tasks:
+ - export DEPLOYPATH=/home/smknks20/public_html/cbt-api.smknukesesi.sch.id/
+ - /bin/cp * $DEPLOYPATH
