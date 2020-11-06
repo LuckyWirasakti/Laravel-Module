@@ -19,6 +19,10 @@ jobs:
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: Update Packages
       run: composer update laravel/framework
+    - name: Clear Cache before testing & migration
+      run: |
+        php artisan config:cache
+        php artisan config:clear
     - name: Generate key
       run: php artisan key:generate
     - name: Directory Permissions
@@ -27,10 +31,6 @@ jobs:
       run: |
         mkdir -p database
         touch database/database.sqlite
-    - name: Clear Cache before testing & migration
-      run: |
-        php artisan config:cache
-        php artisan config:clear
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_CONNECTION: sqlite
