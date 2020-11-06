@@ -15,14 +15,14 @@ jobs:
     - uses: actions/checkout@v2
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
+    - name: Update Packages
+      run: composer update
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: Create Database
       run: |
         mkdir -p database
         touch database/database.sqlite
-    - name: Update Packages
-      run: composer update laravel/framework
     - name: Generate key
       run: |
         php artisan key:generate
