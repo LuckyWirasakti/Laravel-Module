@@ -32,3 +32,7 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
+    - name: Migration
+      run: php artisan migrate --force
+    - name: Seed default data
+      run: php artisan db:seed --force
