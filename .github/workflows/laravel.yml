@@ -36,6 +36,6 @@ jobs:
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
     - name: Migration
-      run: php artisan migrate --env=testing --force
+      run: php artisan migrate --database=sqlite --env=testing --force
     - name: Seed default data
       run: php artisan db:seed --force
