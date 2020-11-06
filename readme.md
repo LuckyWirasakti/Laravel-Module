@@ -1,3 +1,5 @@
+![Laravel](https://github.com/digital-inovasi-bangsa/Laravel-Module-Smartedu/workflows/Laravel/badge.svg)
+
 ## How To
 
 ### Running Supervisor
