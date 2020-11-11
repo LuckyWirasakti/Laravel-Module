@@ -37,4 +37,4 @@ jobs:
     - name: Migration
       run: php artisan migrate --database=sqlite --env=testing --force
     - name: Seed default data
-      run: php artisan db:seed --force
+      run: php artisan db:seed
