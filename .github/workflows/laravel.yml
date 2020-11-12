@@ -37,4 +37,6 @@ jobs:
     - name: Migration
       run: php artisan migrate --database=sqlite --env=testing --force
     - name: Seed default data
-      run: php artisan module:seed school smartedu
+      run: |
+        php artisan module:seed school 
+        php artisan module:seed smartedu
